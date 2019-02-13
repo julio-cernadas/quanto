@@ -23,8 +23,7 @@ public:
     virtual ~Utils() {}
 
     // Static methods to be called... Utils::PrintFile
-    static void PrintFile(const vector_2D<double>& v, 
-                    const vector<string>& s, const int& n); 
+    static void print_data(const vector_2D<string>& s, const int& n);
 
     // Error Checking
     void ErrorChk(const string& s);
