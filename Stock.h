@@ -13,6 +13,7 @@ public:
     Stock() {}
     virtual ~Stock() {}
 
-    vector_2D<string> get_data(const string& fileName);
-    vector_2D<double> clean_data(vector_2D<string>& data);
+    vector_2D<string> prev_data(const string& fileName);
+    vector_2D<double> get_data(vector_2D<string> data);
+
 };

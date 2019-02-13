@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iomanip>
 #include <boost/algorithm/string.hpp>
 
 using std::cout;
@@ -10,7 +11,7 @@ using std::cin;
 using std::string;
 using std::vector;
 
-vector_2D<string> Stock::get_data(const string& fileName) 
+vector_2D<string> Stock::prev_data(const string& fileName) 
 {   
     string line, tmp;                      
     std::ifstream file(fileName);       // incoming file stream to go...
@@ -23,14 +24,22 @@ vector_2D<string> Stock::get_data(const string& fileName)
     return data;
 }
 
-vector_2D<double> Stock::clean_data(vector_2D<string>& data)
-{
-    // TODO: 
-    // - Convert a string vector to a double vector with just nums
-    // - Create Stat methods such as mean and standard dev.
-
-
-
-
+vector_2D<double> Stock::get_data(vector_2D<string> data)
+{  
+    data.erase(data.begin());
+    vector_2D<double> vec2D;
+    for (auto row : data) {   // for each row in data
+        vector<double> vec(row.size() - 1);
+        std::transform(std::next(row.begin()), row.end(), vec.begin(), 
+            [](string const& val) {
+                return stod(val);
+            }
+        );
+        vec2D.push_back(vec);
+    }
+    return vec2D;
 }
 
+
+    // TODO: 
+    // - Create Stat methods such as mean and standard dev.
