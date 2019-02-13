@@ -13,5 +13,5 @@ public:
     Import() {}
     virtual ~Import() {}
 
-    V2DD GetData(const string& fileName);
+    vector_2D<double> GetData(const string& fileName);
 };

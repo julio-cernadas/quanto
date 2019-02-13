@@ -5,26 +5,26 @@
 #include <iostream>
 
 using std::cout;
+using std::cin;
 using std::string;
-using std::ifstream;
-using std::stringstream;
+using std::vector;
 
-V2DD Import::GetData(const string& fileName)
+vector_2D<double> Import::GetData(const std::string& fileName)
 {
-    int ROW = 0, COLS = 0;      // Initialise rows and columns
+    int ROW = 0, COLS = 0;            // Initialise rows and columns
     string line, tmp;
-    stringstream ss;            // Create a stringstream object
-    ifstream file(fileName);    // Add file to fstream
-    getline(file, line);        // Remove file header
-    ss.clear();                 // Clear stringstream
+    std::stringstream ss;            // Create a stringstream object
+    std::ifstream file(fileName);    // Add file to fstream
+    std::getline(file, line);        // Remove file header
+    ss.clear();                      // Clear stringstream
     ss << line;
     while (ss >> tmp) {
             COLS++;             // Determine # columns (COLS) in file
     }
-    V2DD data;                  // Declare a 2D vector of doubles
-    V1DD v(COLS);               // Declare a 1D vector of doubles
+    vector_2D<double> data;                  // Declare a 2D vector of doubles
+    vector<double> v(COLS);               // Declare a 1D vector of doubles
 
-    if(file.is_open()) {
+    if (file.is_open()) {
         while(file.good()) {
             data.push_back(v);  // Add a new row to data
             for (int COL = 0; COL != COLS; ++COL) {
@@ -33,10 +33,12 @@ V2DD Import::GetData(const string& fileName)
             ROW++;              // Keep track of the current ROW and increment
         }
         data.pop_back();            // Remove null values at end of data...
-        std::cout << "\n File:" << fileName << "\n";
-        std::cout << " Imported " << data.size() * (COLS - 1) << " value successfully!\n";
+        cout << "\n File:" << fileName << "\n";
+        cout << " Imported " << data.size() * (COLS - 1) << " value successfully!\n";
         file.close(); // Close file
     } 
-    else {m_utils.ErrorChk("Unable to load file");}
+    else {
+        m_utils.ErrorChk("Unable to load file");
+    }
     return data;
 }

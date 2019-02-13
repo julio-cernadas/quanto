@@ -10,7 +10,5 @@ public:
     Stats() {}                  // No ';' -> default constructor and
     virtual ~Stats() {}         // destructor...
 
-    DBL VAI(const V2DD& v);     // VAI()
+    double VAI(const vector_2D<double>& v);     // VAI()
 };
-
-
