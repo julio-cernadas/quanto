@@ -13,13 +13,19 @@ using std::cout, std::cin, std::string, std::vector;
 
 int main() 
 {
-    vector_2D<string> prev_data;
+    vector_2D<string> raw_data;
     vector_2D<double> data;
+
     string fileName = "AAL.csv";
     Stock aal_stock;
-    prev_data = aal_stock.prev_data(fileName);
-    data      = aal_stock.get_data(prev_data);
-    Utils::print_data(data,10);
+    Stats stats;
+    raw_data = aal_stock.raw_data(fileName);
+    data = aal_stock.get_data(raw_data);
+    aal_stock.add_daily_change(data);
+
+    Utils::print_data(data,15);
+    double mean = stats.get_returns_mean(data);
+    cout << mean;
     return 0;
 }
 

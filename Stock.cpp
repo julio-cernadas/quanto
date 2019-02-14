@@ -11,7 +11,7 @@ using std::cin;
 using std::string;
 using std::vector;
 
-vector_2D<string> Stock::prev_data(const string& fileName) 
+vector_2D<string> Stock::raw_data(const string& fileName) 
 {   
     string line, tmp;                      
     std::ifstream file(fileName);       // incoming file stream to go...
@@ -40,6 +40,11 @@ vector_2D<double> Stock::get_data(vector_2D<string> data)
     return vec2D;
 }
 
-
-    // TODO: 
-    // - Create Stat methods such as mean and standard dev.
+void Stock::add_daily_change(vector_2D<double>& data)
+{
+    double change;
+    for (auto& row : data) {
+        change = (row[3] - row[0]) / row[0];
+        row.push_back(change);
+    }
+}

@@ -13,7 +13,7 @@ void Utils::print_data(const vector_2D<string>& v, const int& n)
 {
     for(int i = 0; i != n; ++i) {
         for(int j = 0; j < v[0].size(); ++j) {
-            cout << std::left << std::setw(7) << v[i][j];
+            cout << std::left << "\t" << std::setw(6) << v[i][j];
         }
         cout << "\n";
     }
@@ -23,7 +23,7 @@ void Utils::print_data(const vector_2D<double>& v, const int& n)
 {
     for(int i = 0; i != n; ++i) {
         for(int j = 0; j < v[0].size(); ++j) {
-            cout << std::left << std::setw(7) << v[i][j];
+            cout << std::left << "\t" << std::setw(6) << v[i][j];
         }
         cout << "\n";
     }

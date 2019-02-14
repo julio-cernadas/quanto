@@ -10,5 +10,6 @@ public:
     Stats() {}                  // No ';' -> default constructor and
     virtual ~Stats() {}         // destructor...
 
-    // double mean(const vec);
+    double get_returns_mean(vector_2D<double>& data);
+    double get_standard_dev(vector_2D<double>& data);
 };
