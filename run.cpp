@@ -8,6 +8,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+// git
 
 using std::cout, std::cin, std::string, std::vector;
 
@@ -24,7 +25,7 @@ int main()
     aal_stock.add_daily_change(data);
 
     Utils::print_data(data,15);
-    double mean = stats.get_returns_mean(data);
+    double mean = stats.get_standard_dev(data);
     cout << mean;
     return 0;
 }
