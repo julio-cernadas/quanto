@@ -8,7 +8,6 @@
 #include <string>
 #include <memory>
 #include <vector>
-// git
 
 using std::cout, std::cin, std::string, std::vector;
 
