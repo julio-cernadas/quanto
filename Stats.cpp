@@ -18,6 +18,7 @@ double Stats::get_standard_dev(vector_2D<double>& data)
     int n = data.size();
     double std = 0.0;
     double mean = get_returns_mean(data);
-    
+
     return mean;
 }
+
