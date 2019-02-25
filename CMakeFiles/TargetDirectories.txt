@@ -1,0 +1,3 @@
+/Users/julio/Downloads/quanto/CMakeFiles/rebuild_cache.dir
+/Users/julio/Downloads/quanto/CMakeFiles/edit_cache.dir
+/Users/julio/Downloads/quanto/CMakeFiles/run.dir

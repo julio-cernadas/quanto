@@ -1,7 +1,6 @@
 #include "Stats.h"
-#include "Utils.h"
-#include <cmath>
 
+#include <cmath>
 
 double Stats::get_returns_mean(vector_2D<double>& data)
 {

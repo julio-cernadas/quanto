@@ -8,7 +8,7 @@ using std::string;
 class Stock
 {
 private:
-    Utils m_utils;
+
 public:
     Stock() {}
     virtual ~Stock() {}
