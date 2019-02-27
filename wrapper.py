@@ -54,7 +54,7 @@ def get_prices_df(ticker):
     except:
         return None
 
-print(get_prices_df("MSFT"))
+print(get_prices_df("HD"))
 
 def get_company_name(ticker):
 	try:
