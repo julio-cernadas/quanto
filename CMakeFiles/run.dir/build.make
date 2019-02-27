@@ -124,7 +124,6 @@ run: CMakeFiles/run.dir/Stock.cpp.o
 run: CMakeFiles/run.dir/Utils.cpp.o
 run: CMakeFiles/run.dir/Stats.cpp.o
 run: CMakeFiles/run.dir/build.make
-run: /usr/lib/libcurl.dylib
 run: CMakeFiles/run.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/julio/Downloads/quanto/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable run"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/run.dir/link.txt --verbose=$(VERBOSE)
