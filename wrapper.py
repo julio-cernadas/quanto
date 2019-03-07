@@ -3,7 +3,6 @@ import json
 import requests
 import pandas as pd
 from datetime import date, timedelta
-# Comment
 
 def get_last_price(ticker):
 	url = "https://www.alphavantage.co/query"
