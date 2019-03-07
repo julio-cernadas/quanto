@@ -3,7 +3,7 @@ import json
 import requests
 import pandas as pd
 from datetime import date, timedelta
-
+# Adding 
 def get_last_price(ticker):
 	url = "https://www.alphavantage.co/query"
 	function = "TIME_SERIES_DAILY_ADJUSTED"
