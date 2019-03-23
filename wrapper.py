@@ -10,7 +10,7 @@ import pandas as pd
 
 from pandas.compat import StringIO
 
-def get_eod_data(symbol="HD.US", api_token="5c958084138e54.81660498", session=None):
+def get_eod_data(symbol="HD.US", api_token="xxxxxxxx", session=None):
 	if session is None:
 		session = requests.Session()
 	url = "https://eodhistoricaldata.com/api/eod/"+symbol
