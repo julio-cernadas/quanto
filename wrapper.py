@@ -4,6 +4,27 @@ import requests
 import pandas as pd
 from datetime import date, timedelta
 
+import requests
+
+import pandas as pd
+
+from pandas.compat import StringIO
+
+def get_eod_data(symbol="HD.US", api_token="5c958084138e54.81660498", session=None):
+	if session is None:
+		session = requests.Session()
+	url = "https://eodhistoricaldata.com/api/eod/"+symbol
+	params = {"api_token": api_token}
+	r = session.get(url, params=params)
+	if r.status_code == requests.codes.ok:
+		df = pd.read_csv(StringIO(r.text), skipfooter=1, parse_dates=[0], index_col=0)
+		return df
+	else:
+		raise Exception(r.status_code, r.reason, url)
+
+print(get_eod_data())
+
+
 def get_last_price(ticker):
 	url = "https://www.alphavantage.co/query"
 	function = "TIME_SERIES_DAILY_ADJUSTED"
@@ -54,7 +75,6 @@ def get_prices_df(ticker):
     except:
         return None
 
-print(get_prices_df("HD"))
 
 def get_company_name(ticker):
 	try:

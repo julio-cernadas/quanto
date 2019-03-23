@@ -8,7 +8,7 @@
 #include <string>
 #include <memory>
 #include <vector>
-//
+
 using std::cout, std::cin, std::string, std::vector;
 
 int main() 
