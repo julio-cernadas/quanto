@@ -1,86 +1,49 @@
-#!/usr/bin/env/ python3
+#!/usr/bin/env/python3
 import json
 import requests
 import pandas as pd
-from datetime import date, timedelta
-
 import requests
+import numpy as np
 
-import pandas as pd
-
+from datetime import date, timedelta
 from pandas.compat import StringIO
 
-def get_eod_data(symbol="HD.US", api_token="xxxxxxxx", session=None):
-	if session is None:
-		session = requests.Session()
-	url = "https://eodhistoricaldata.com/api/eod/"+symbol
-	params = {"api_token": api_token}
-	r = session.get(url, params=params)
-	if r.status_code == requests.codes.ok:
-		df = pd.read_csv(StringIO(r.text), skipfooter=1, parse_dates=[0], index_col=0)
-		return df
-	else:
-		raise Exception(r.status_code, r.reason, url)
+# TODO:
+# - add 'currency','openInterest', etc eventually
 
-print(get_eod_data())
+"""
+option price
+current stock price
+strike price 
+risk free interest rate
+t is the time to maturity
+N denotes a normal distribution
+"""
 
+# Retrieving Data
+key = ""
+def get_eod_data(symbol = "HD.US", api_token = key):
+	url  = "https://eodhistoricaldata.com/api/options/" + symbol
+	data = {	"api_token" : api_token}
+	dictionary = requests.get(url, params = data).json() 
+	keys = list(dictionary.keys())
+	data = keys[2]
+	resp = dictionary[data]
+	lst1 = [x for x in resp]
+	lst2 = list()
+	for x in lst1:
+		put,call = x["options"]["PUT"], x["options"]["CALL"]
+		df = pd.DataFrame.from_dict(call+put)
+		lst2.append(df)
+	return pd.concat(lst2)
 
-def get_last_price(ticker):
-	url = "https://www.alphavantage.co/query"
-	function = "TIME_SERIES_DAILY_ADJUSTED"
-	symbol = ticker
-	outputsize= "compact"
-	api_key = "4I16NYFU17Q3KNKC"
-	data = { "function": function,
-			"symbol": symbol,
-			"outputsize": outputsize,
-			"apikey": api_key }
-	try: 
-		dictionary = requests.get(url, params = data).json() 
-		keys = list(dictionary.keys())
-		series = keys[1]
-		resp  = dictionary[series]
-		dict_ = next(iter(resp.values()))
-		pricing = {	"Symbol": ticker,
-					"Open"  : float(dict_['1. open']),
-					"High"  : float(dict_['2. high']),
-					"Low"   : float(dict_['3. low']),
-					"Close" : float(dict_['4. close']),
-					"Vol"   : float(dict_['5. volume']) }
-		return pricing
-	except:
-		return None
+def transform_df(data):
+	df = data[["expirationDate","contractName","type","strike",
+				"inTheMoney","lastPrice","change","changePercent",
+				"volume","impliedVolatility","delta","gamma","theta",
+				"vega","rho","theoretical","intrinsicValue","timeValue"]]
+	df.set_index("expirationDate",inplace=True)
+	return df
 
-def get_prices_df(ticker):
-    url = "https://www.alphavantage.co/query"
-    function = "TIME_SERIES_DAILY_ADJUSTED"
-    symbol = ticker
-    outputsize= "compact"
-    api_key = "4I16NYFU17Q3KNKC"
-    data = { "function": function,
-            "symbol": symbol,
-            "outputsize": outputsize,
-            "apikey": api_key }
-    try:
-        dictionary = requests.get(url, params = data).json() 
-        keys = list(dictionary.keys())
-        series = keys[1]
-        resp = dictionary[series]
-        df = pd.DataFrame.from_dict(resp, orient='index')
-        df['date'] = pd.to_datetime(df.index)
-        fivemonthsago = date.today() - timedelta(140)
-        df = df.rename(columns={"5. adjusted close": "Price"})
-        df = df[(df['date']>=fivemonthsago)][['Price','date']].set_index('date')
-        return df
-    except:
-        return None
-
-
-def get_company_name(ticker):
-	try:
-		endpoint = 'http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol='+ticker
-		response = requests.get(endpoint).json()
-		company_name = response['Name']
-		return company_name
-	except:
-		return 'N/A'
+df = transform_df(get_eod_data())
+print(df)
