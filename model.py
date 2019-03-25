@@ -15,6 +15,9 @@ from wrapper import get_eod_data, transform_dfs
 puts, calls = get_eod_data()
 df_puts, df_calls = transform_dfs(puts, calls)
 
+put_maturities = sorted(set(df_puts["expDate"]))
+call_maturities = sorted(set(df_calls["expDate"]))
+
 def N(z):
     return norm.cdf(z)
 
@@ -120,5 +123,5 @@ df_calls["TimeUntilExp"] = df_calls.apply(get_time_fraction_until_exp, axis=1)
 df_calls["InterestRate"] = df_calls.apply(get_rate, axis=1)
 df_calls["Mid"] = df_calls.apply(get_mid, axis=1)
 
-print(df_calls.head(50))
-
+print(put_maturities)
+print(call_maturities)
