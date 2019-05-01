@@ -34,7 +34,7 @@ def get_last_price(ticker):
 		return 0.0
 
 # retrieving data from EODHistoricalData.com API services
-key = ""
+key = "5c958084138e54.81660498"
 def get_eod_data(symbol, api_token = key):
 	stock_price = get_last_price(symbol.replace(".US",""))
 	url  = "https://eodhistoricaldata.com/api/options/" + symbol

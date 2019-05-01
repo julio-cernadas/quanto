@@ -19,3 +19,4 @@ x = np.linspace(-2 * np.pi, 2 * np.pi, 50)
 
 create_plot([x],[f(x)],['b'],['f(x)'],['x', 'f(x)'])
 plt.show()
+
